@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn0, btn1, btn2, btn3, button_5, button_6, button_7, button_8, button_9, button_10, button_11, button_12, button_16, btn_dot, btn_clear, btn_plus, btn_equal;
     TextView text_display;
+    Evaluate e;
 
     // This is to evaluate the math expression
 
@@ -133,16 +134,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private String evaluate(String expression) throws Exception {
-        Expression e = new ExpressionBuilder(expression).build();
-        double result = e.evaluate();
+//        Expression e = new ExpressionBuilder(expression).build();
+//        double result = e.evaluate();
+//
+//        // Check if the result is a whole number and the original expression was integer-based
+//        if (result == (long) result && !expression.contains(".")) {
+//            return String.format("%d", (long) result);
+//        } else {
+//            BigDecimal decimal = new BigDecimal(result);
+//            return decimal.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
+//        }
 
-        // Check if the result is a whole number and the original expression was integer-based
-        if (result == (long) result && !expression.contains(".")) {
-            return String.format("%d", (long) result);
-        } else {
-            BigDecimal decimal = new BigDecimal(result);
-            return decimal.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
-        }
+        BigDecimal decimal = e.evaluate(expression);
+        return decimal.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
     }
 
     private void addNumber(String number) {
